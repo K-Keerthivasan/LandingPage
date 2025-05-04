@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
-import { useTheme } from 'next-themes';
+import {SunIcon, MoonIcon} from '@heroicons/react/24/solid';
+import {useTheme} from 'next-themes';
 
 // Hook defined inline to prevent hydration issues
 function useIsClient() {
@@ -13,17 +13,17 @@ function useIsClient() {
 }
 
 const navItems = [
-    { name: 'OUR WORK', href: '/' },
-    { name: 'WEB DEVELOPMENT', href: '/web' },
-    { name: 'VIDEO PRODUCTION', href: '/video' },
-    { name: 'DIGITAL MARKETING', href: '/marketing' },
-    { name: 'ABOUT US', href: '/about' },
-    { name: 'CONTACT', href: '/contact' },
+    {name: 'OUR WORK', href: '/'},
+    {name: 'WEB DEVELOPMENT', href: '/web'},
+    {name: 'VIDEO PRODUCTION', href: '/video'},
+    {name: 'DIGITAL MARKETING', href: '/marketing'},
+    {name: 'ABOUT US', href: '/about'},
+    {name: 'CONTACT', href: '/contact'},
 ];
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { resolvedTheme, setTheme } = useTheme();
+    const {resolvedTheme, setTheme} = useTheme();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const isClient = useIsClient();
 
@@ -57,9 +57,20 @@ export default function Sidebar() {
         md:flex-col md:w-[70px] md:h-full md:items-center md:justify-start md:pt-6 md:px-0"
             >
                 <div className="md:mb-4">
-{/*
-                    <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full" />
-*/}
+
+                    <Link
+                        href="/"
+                        className="text-white dark:text-gray-100 text-2xl font-semibold italic transition-all duration-300
+             hover:scale-110
+             hover:text-shadow-glow-light
+             dark:hover:[text-shadow:0_0_10px_red]
+             focus:outline-none"
+                    >
+                        KK
+                    </Link>
+
+
+
                 </div>
 
                 <div className="md:mt-2">
@@ -67,9 +78,9 @@ export default function Sidebar() {
                         onClick={() => setIsOpen(true)}
                         className="w-8 h-8 border-white rounded flex flex-col justify-center items-center"
                     >
-                        <span className="w-5 h-0.5 bg-white mb-1" />
-                        <span className="w-5 h-0.5 bg-white mb-1" />
-                        <span className="w-5 h-0.5 bg-white" />
+                        <span className="w-5 h-0.5 bg-white mb-1"/>
+                        <span className="w-5 h-0.5 bg-white mb-1"/>
+                        <span className="w-5 h-0.5 bg-white"/>
                     </button>
                 </div>
             </div>
@@ -106,12 +117,12 @@ export default function Sidebar() {
                     </nav>
 
                     <div className="mt-10 text-sm">
-                        <p>+15025093349</p>
-                        <p>inquiries@mysite.com</p>
+                        <p>+1 (226)-977-6398</p>
+                        <p>kkvasan99@gmail.com</p>
                     </div>
 
                     <div className="mt-6 flex items-center gap-4">
-                  {/*      <img src="/us-flag.png" alt="US" className="w-10" />
+                        {/*      <img src="/us-flag.png" alt="US" className="w-10" />
                         <img src="/kentucky.png" alt="Kentucky" className="w-16" />*/}
                     </div>
                 </div>
@@ -126,13 +137,13 @@ export default function Sidebar() {
                     >
                         {resolvedTheme === 'dark' ? (
                             <>
-                                <SunIcon className="w-5 h-5" />
-                                <span>Light Mode</span>
+                                <SunIcon className="w-5 h-5"/>
+                                <span>Light</span>
                             </>
                         ) : (
                             <>
-                                <MoonIcon className="w-5 h-5" />
-                                <span>Dark Mode</span>
+                                <MoonIcon className="w-5 h-5"/>
+                                <span>Dark</span>
                             </>
                         )}
                     </button>
