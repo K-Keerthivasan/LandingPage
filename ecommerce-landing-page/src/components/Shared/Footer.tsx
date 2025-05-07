@@ -58,7 +58,6 @@ export default function Footer() {
                             {service.title}
                         </Link>
                     ))}
-                    <Link href="/careers" className="hover:underline">Careers</Link>
                 </div>
 
                 {/* 4. Contact Info & Socials */}

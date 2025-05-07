@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 type Service = {
     id: number;
@@ -17,8 +17,7 @@ type Service = {
 };
 
 
-
-import { supabase } from '@/components/backend/supabaseClient'; // adjust path as needed
+import {supabase} from '@/components/backend/supabaseClient'; // adjust path as needed
 
 
 export default function ServiceSection() {
@@ -26,10 +25,10 @@ export default function ServiceSection() {
 
     useEffect(() => {
         const fetchServices = async () => {
-            const { data, error } = await supabase
+            const {data, error} = await supabase
                 .from('services')
                 .select('*')
-                .order('created_at', { ascending: true });
+                .order('created_at', {ascending: true});
 
             if (!error && data) setServices(data);
         };
@@ -74,7 +73,7 @@ export default function ServiceSection() {
                                 {service.description}
                             </p>
                             <Link
-                                href={service.route || '#'}
+                                href={`/services/${service.route}`}
                                 className="inline-block mt-4 px-6 py-3 bg-blue-900 dark:bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors"
                             >
                                 Learn More
