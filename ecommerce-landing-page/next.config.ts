@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
         domains: ['i.imgur.com'],
     },
     typescript: {
+/*
         ignoreBuildErrors: true,
+*/
     },
 };
 
