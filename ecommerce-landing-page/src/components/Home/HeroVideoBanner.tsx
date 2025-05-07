@@ -28,7 +28,7 @@ export default function HeroVideoBanner() {
                     Explore my world of creativity and innovation
                 </p>
                 <Link
-                    href="#about"
+                    href="/about"
                     className="mt-6 px-6 py-3 text-white font-semibold border border-yellow-400 hover:bg-yellow-400 hover:text-black transition duration-300"
                 >
                     Click Here to See More

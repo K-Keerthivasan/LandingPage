@@ -1,9 +1,10 @@
 import React from "react";
 
-import HeroVideoBanner from "@/components/HeroVideoBanner";
-import ServiceSection from "@/components/ServiceSection";
+import HeroVideoBanner from "@/components/Home/HeroVideoBanner";
+import ServiceSection from "@/components/Home/ServiceSection";
 import Link from "next/link";
-import OurWorkSection from "@/components/OurWorkSection";
+import OurWorkSection from "@/components/Home/OurWorkSection";
+import ContactPageSection from "@/components/Shared/ContactPageSection";
 
 export default function HomePage() {
     return (
@@ -45,6 +46,9 @@ export default function HomePage() {
             </section>
 
             <OurWorkSection/>
+
+                <ContactPageSection/>
+
             </div>
         </div>
 

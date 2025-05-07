@@ -1,18 +1,20 @@
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import Sidebar from '@/components/Sidebar';
-import Footer from '@/components/Footer';
+import { ThemeProvider } from '@/components/Shared/ThemeProvider';
+import Footer from '@/components/Shared/Footer';
 
 import '@fontsource/poppins'; // Defaults to weight 400
 import '@fontsource/inter';   // Defaults to weight 400
 import '@fontsource/roboto';  // Defaults to weight 400
 import "@fontsource/cascadia-code/500-italic.css";
+import ClientSidebarWrapper from "@/components/Shared/ClientSidebarWrapper";
 
 
 export const metadata = {
     title: 'Your App',
     description: 'Description',
 };
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -22,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Full-height layout */}
             <div className="flex min-h-screen w-full">
                 {/* Sidebar */}
-                <Sidebar />
+                <ClientSidebarWrapper />
 
                 {/* Main content area with footer */}
                 <div className="flex flex-col flex-1">
