@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { getUserSession } from '@/components/backend/auth';
-import { getAllServices, addService, updateService, deleteService } from '@/components/backend/services';
+import {useEffect, useRef, useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {getUserSession} from '@/components/backend/auth';
+import {getAllServices, addService, updateService, deleteService} from '@/components/backend/services';
 
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
+import ServicesContentEditor, { ServicesContentEditorRef } from "@/components/backend/service/ServicesContentEditor";
+import Link from "next/link";
 
-const editorExtensions = [StarterKit];
 
 type Service = {
     id: number;
@@ -29,6 +28,7 @@ export default function ServicesWriteOnly() {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [deletingServiceId, setDeletingServiceId] = useState<number | null>(null);
+    const editorRef = useRef<ServicesContentEditorRef>(null);
 
     const [form, setForm] = useState<Omit<Service, 'id' | 'created_at'>>({
         title: '',
@@ -40,13 +40,6 @@ export default function ServicesWriteOnly() {
         content: '',
     });
 
-    const editor = useEditor({
-        extensions: editorExtensions,
-        content: form.content,
-        onUpdate: ({ editor }) => {
-            setForm(prev => ({ ...prev, content: editor.getHTML() }));
-        },
-    });
 
     const handleDeleteConfirm = async () => {
         if (deletingServiceId === null) return;
@@ -69,7 +62,7 @@ export default function ServicesWriteOnly() {
                 return;
             }
 
-            const { data } = await getAllServices();
+            const {data} = await getAllServices();
             if (data) setServices(data);
             setLoading(false);
         };
@@ -77,7 +70,7 @@ export default function ServicesWriteOnly() {
     }, [router]);
 
     const fetchData = async () => {
-        const { data } = await getAllServices();
+        const {data} = await getAllServices();
         if (data) setServices(data);
     };
 
@@ -89,17 +82,28 @@ export default function ServicesWriteOnly() {
             return;
         }
 
+        const html = editorRef.current?.getContent() || '';
+
         if (editingId) {
-            await updateService(editingId, form);
+            await updateService(editingId, { ...form, content: html });
         } else {
-            await addService(form);
+            await addService({ ...form, content: html });
         }
 
-        setForm({ title: '', description: '', thumbnailURL: '', videoURL: '', route: '', type: 'image', content: '' });
-        editor?.commands.setContent('');
+        editorRef.current?.clearContent(); // 🔄 clear AFTER submission
+        setForm({
+            title: '',
+            description: '',
+            thumbnailURL: '',
+            videoURL: '',
+            route: '',
+            type: 'image',
+            content: '',
+        });
         setEditingId(null);
         fetchData();
     };
+
 
     const handleSelect = (id: number) => {
         const selected = services.find(s => s.id === id);
@@ -114,7 +118,6 @@ export default function ServicesWriteOnly() {
                 type: selected.type,
                 content: selected.content,
             });
-            editor?.commands.setContent(selected.content);
         }
     };
 
@@ -123,8 +126,15 @@ export default function ServicesWriteOnly() {
     return (
         <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white px-6 py-20 transition-colors">
             <div className="max-w-7xl mx-auto ml-0 md:ml-[100px] transition-all">
-                <h1 className="text-4xl md:text-5xl font-bold text-blue-900 dark:text-blue-300 mb-4">Manage Services</h1>
-                <div className="w-12 h-1 bg-gray-400 mb-8" />
+                <Link href="/dashboard">
+                    <button className="mb-6 px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-black dark:text-white rounded shadow">
+                        ← Back to Dashboard
+                    </button>
+                </Link>
+
+                <h1 className="text-4xl md:text-5xl font-bold text-blue-900 dark:text-blue-300 mb-4">Manage
+                    Services</h1>
+                <div className="w-12 h-1 bg-gray-400 mb-8"/>
 
                 <div className="overflow-x-auto mb-10">
                     <table className="min-w-full text-left text-sm border rounded dark:border-gray-700">
@@ -174,33 +184,33 @@ export default function ServicesWriteOnly() {
                             type="text"
                             placeholder="Title"
                             value={form.title}
-                            onChange={e => setForm({ ...form, title: e.target.value })}
+                            onChange={e => setForm({...form, title: e.target.value})}
                             className="p-2 rounded border w-full dark:bg-gray-700"
                         />
                         <input
                             type="text"
                             placeholder="Thumbnail Image URL"
                             value={form.thumbnailURL}
-                            onChange={e => setForm({ ...form, thumbnailURL: e.target.value })}
+                            onChange={e => setForm({...form, thumbnailURL: e.target.value})}
                             className="p-2 rounded border w-full dark:bg-gray-700"
                         />
                         <input
                             type="text"
                             placeholder="Video URL (optional)"
                             value={form.videoURL}
-                            onChange={e => setForm({ ...form, videoURL: e.target.value })}
+                            onChange={e => setForm({...form, videoURL: e.target.value})}
                             className="p-2 rounded border w-full dark:bg-gray-700"
                         />
                         <input
                             type="text"
                             placeholder="Route (e.g. /services/web)"
                             value={form.route}
-                            onChange={e => setForm({ ...form, route: e.target.value })}
+                            onChange={e => setForm({...form, route: e.target.value})}
                             className="p-2 rounded border w-full dark:bg-gray-700"
                         />
                         <select
                             value={form.type}
-                            onChange={e => setForm({ ...form, type: e.target.value as 'image' | 'video' })}
+                            onChange={e => setForm({...form, type: e.target.value as 'image' | 'video'})}
                             className="p-2 rounded border w-full dark:bg-gray-700"
                         >
                             <option value="image">Image</option>
@@ -211,7 +221,7 @@ export default function ServicesWriteOnly() {
                     <textarea
                         placeholder="Description"
                         value={form.description}
-                        onChange={e => setForm({ ...form, description: e.target.value })}
+                        onChange={e => setForm({...form, description: e.target.value})}
                         className="w-full p-2 rounded border dark:bg-gray-700"
                         rows={4}
                     />
@@ -220,7 +230,12 @@ export default function ServicesWriteOnly() {
 
 
                     <div className="bg-white dark:bg-gray-700 p-2 rounded border">
-                        <EditorContent editor={editor} />
+                        <ServicesContentEditor
+                            ref={editorRef}
+                            content={form.content || ''}
+                            key={editingId || 'new'} // <-- Forces re-initialization on new edit
+                        />
+
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -244,7 +259,6 @@ export default function ServicesWriteOnly() {
                                         content: '',
                                     });
                                     setEditingId(null);
-                                    editor?.commands.setContent('');
                                 }}
                                 className="text-sm text-gray-500 hover:text-red-500"
                             >

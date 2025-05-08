@@ -28,6 +28,7 @@ export default async function ServiceDetailPage({
             <h1 className="text-4xl font-bold mb-4 text-blue-900 dark:text-blue-300">
                 {service.title}
             </h1>
+
             <div className="mb-6 text-gray-700 dark:text-gray-300">
                 {service.description}
             </div>
@@ -36,7 +37,7 @@ export default async function ServiceDetailPage({
                 <video
                     src={service.videoURL}
                     controls
-                    className="w-full mb-6 rounded"
+                    className="w-full mb-6 rounded shadow-lg"
                 />
             ) : (
                 <Image
@@ -44,12 +45,12 @@ export default async function ServiceDetailPage({
                     alt={service.title}
                     width={800}
                     height={400}
-                    className="rounded"
+                    className="rounded shadow-lg mb-6"
                 />
             )}
 
             <article
-                className="prose dark:prose-invert max-w-none"
+                className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ __html: service.content }}
             />
         </main>

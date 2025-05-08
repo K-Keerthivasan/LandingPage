@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -6,54 +8,62 @@
 }
 
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), 'Poppins', sans-serif;
-  }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading), 'Poppins', sans-serif;
+    }
 
-  body {
-    font-family: var(--font-body), 'Inter', sans-serif;
-  }
+    body {
+        font-family: var(--font-body), 'Inter', sans-serif;
+    }
 
-  p {
-    font-family: var(--font-paragraph), 'Roboto', sans-serif;
-  }
+    p {
+        font-family: var(--font-paragraph), 'Roboto', sans-serif;
+    }
 }
 
-@layer utilities {
-  .hover\:text-shadow-glow-light:hover {
-    text-shadow:
-            1px 0 1px rgba(255, 255, 255, 0.8),
-            -1px 0 1px rgba(255, 255, 255, 0.8);
-  }
+.btn-tiptap {
+    @apply px-2 py-1 text-sm rounded border bg-gray-200 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600;
+}
 
-  .dark\:hover\:text-shadow-glow-dark:hover {
-    text-shadow: 0 0 10px red;
-  }
+.ProseMirror {
+    @apply min-h-[200px] outline-none leading-relaxed space-y-4;
+}
+
+
+@layer utilities {
+    .hover\:text-shadow-glow-light:hover {
+        text-shadow: 1px 0 1px rgba(255, 255, 255, 0.8),
+        -1px 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .dark\:hover\:text-shadow-glow-dark:hover {
+        text-shadow: 0 0 10px red;
+    }
 }
 
 @theme {
-  --color-bg: #ffffff;
-  --color-text: #000000;
+    --color-bg: #ffffff;
+    --color-text: #000000;
 
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-paragraph: 'Roboto', sans-serif;
-  --font-mono: 'Cascadia Code', monospace;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-paragraph: 'Roboto', sans-serif;
+    --font-mono: 'Cascadia Code', monospace;
 
 }
 
 @theme dark {
-  --color-bg: #000000;
-  --color-text: #ffffff;
+    --color-bg: #000000;
+    --color-text: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+    :root {
 
-  }
+    }
 }
 

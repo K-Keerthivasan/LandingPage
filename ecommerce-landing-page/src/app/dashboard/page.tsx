@@ -3,6 +3,7 @@
 import { useProtectRoute } from '@/components/backend/protectRoute';
 import { signOutUser } from '@/components/backend/auth';
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 export default function DashboardPage() {
     const { loading } = useProtectRoute();
@@ -38,15 +39,20 @@ export default function DashboardPage() {
 
                 {/* Sections go here */}
                 <div className="space-y-8">
-                    {/* Replace these divs with real admin components later */}
-                    <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded shadow">
-                        <h2 className="text-xl font-semibold mb-2">OurWorks Manager</h2>
-                        <p>Here you’ll be able to add, edit, and delete project cards.</p>
-                    </div>
+                    <div className="space-y-4">
+                        <Link href="/dashboard/ourworks">
+                            <button className="w-full text-left p-6 bg-gray-100 dark:bg-gray-800 rounded shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                                <h2 className="text-xl font-semibold mb-2">OurWorks Manager</h2>
+                                <p>Here you’ll be able to add, edit, and delete project cards.</p>
+                            </button>
+                        </Link>
 
-                    <div className="p-6 bg-gray-100 dark:bg-gray-800 rounded shadow">
-                        <h2 className="text-xl font-semibold mb-2">Services Editor</h2>
-                        <p>Control and update your offered services dynamically.</p>
+                        <Link href="/dashboard/services">
+                            <button className="w-full text-left p-6 bg-gray-100 dark:bg-gray-800 rounded shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                                <h2 className="text-xl font-semibold mb-2">Services Editor</h2>
+                                <p>Control and update your offered services dynamically.</p>
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
