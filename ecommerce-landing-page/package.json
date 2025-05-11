@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "next lint",
-    "build": "next build && next-on-pages --experimental-minify"
+    "build": "next build"
   },
   "dependencies": {
     "@fontsource/cascadia-code": "^5.2.1",
