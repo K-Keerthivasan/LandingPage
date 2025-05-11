@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build && next-on-pages --experimental-minify"
   },
   "dependencies": {
     "@fontsource/cascadia-code": "^5.2.1",

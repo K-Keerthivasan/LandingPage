@@ -9,7 +9,7 @@ import {
     FaLinkedinIn,
 } from 'react-icons/fa';
 import Link from 'next/link';
-import { getAllServices } from '@/components/backend/services';
+import { getAllServices } from '@/components/backend/service/servicesClient';
 
 export default function Footer() {
     const [services, setServices] = useState<{ title: string; route: string }[]>([]);

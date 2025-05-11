@@ -30,7 +30,7 @@ const getButtonClasses = (isActive: boolean) =>
 
 // ForwardRef is used to allow the parent component to get a ref to this component
 // and call its methods (like getContent and clearContent)
-const ServicesContentEditor = forwardRef<ServicesContentEditorRef, Props>(({ content }, ref) => {
+const ContentEditor = forwardRef<ServicesContentEditorRef, Props>(({ content }, ref) => {
     // Ref to track if this is the first time the component is loaded
     const isFirstLoad = useRef(true);
 
@@ -78,9 +78,7 @@ const ServicesContentEditor = forwardRef<ServicesContentEditorRef, Props>(({ con
             editor.commands.setContent(content);
             isFirstLoad.current = false;
         } else if (editor && !isFirstLoad.current && editor.getHTML() !== content) {
-            // Optional: Add logic here if the `content` prop can change after initial load
-            // and you want the editor to update accordingly.
-            // editor.commands.setContent(content);
+
         }
     }, [editor, content]); // Depend on editor and content
 
@@ -255,7 +253,7 @@ const ServicesContentEditor = forwardRef<ServicesContentEditorRef, Props>(({ con
 });
 
 // Set a display name for easier debugging
-ServicesContentEditor.displayName = 'ServicesContentEditor';
+ContentEditor.displayName = 'ContentEditor';
 
 // Export the component
-export default ServicesContentEditor;
+export default ContentEditor;

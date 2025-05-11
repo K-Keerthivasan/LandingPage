@@ -1,10 +1,10 @@
 'use client';
-
+import { HomeIcon } from '@heroicons/react/24/solid';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 import { useTheme } from 'next-themes';
-import { getAllServices } from '@/components/backend/services';
+import { getAllServices } from '@/components/backend/service/servicesClient';
 
 function useIsClient() {
     const [isClient, setIsClient] = useState(false);
@@ -98,7 +98,7 @@ export default function Sidebar() {
 
                     <nav className="flex flex-col gap-4 text-lg">
                         {/* Static Top Items */}
-                        <Link href="/" onClick={() => setIsOpen(false)} className="hover:underline">
+                        <Link href="/our-works" onClick={() => setIsOpen(false)} className="hover:underline">
                             OUR WORK
                         </Link>
                         <Link href="/about" onClick={() => setIsOpen(false)} className="hover:underline">
@@ -132,7 +132,15 @@ export default function Sidebar() {
                     </div>
                 </div>
 
-                <div className="mt-6 flex justify-center">
+                <div className="mt-6 flex flex-col items-center gap-4">
+                    <Link
+                        href="/"
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-2 text-white hover:text-yellow-300 transition-colors duration-200"
+                    >
+                        <HomeIcon className="w-5 h-5" />
+                    </Link>
+
                     <button
                         onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                         className="flex items-center space-x-2 bg-white text-blue-900 px-4 py-2 rounded"
