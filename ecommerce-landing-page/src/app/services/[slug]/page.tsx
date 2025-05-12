@@ -11,12 +11,14 @@ export async function generateStaticParams() {
     }));
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function ServiceDetailPage({
                                                     params,
                                                 }: {
-    params: Promise<{ slug: string }>;
+    params: { slug: string };
 }) {
-    const { slug } = await params;
+    const { slug } = params;
 
     const { data } = await getAllServices();
     const service = data?.find(s => s.route === slug);

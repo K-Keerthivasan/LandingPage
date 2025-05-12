@@ -32,7 +32,6 @@ export default function HeroVideoBanner() {
                     className="object-cover"
                 />
             </div>
-
             {/* Vimeo Background Video */}
             <iframe
                 src="https://player.vimeo.com/video/1055439402?h=a2364db79e&autoplay=1&muted=1&loop=1&background=1"

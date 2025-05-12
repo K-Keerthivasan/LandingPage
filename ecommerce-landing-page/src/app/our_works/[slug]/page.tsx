@@ -8,7 +8,7 @@ export async function generateStaticParams() {
     return data?.map(w => ({ slug: w.route })) ?? [];
 }
 
-
+export const dynamic = 'force-dynamic';
 
 export default async function WorkDetailPage({
                                                  params,
