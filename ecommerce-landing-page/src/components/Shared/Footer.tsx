@@ -32,7 +32,7 @@ export default function Footer() {
 
     return (
         <footer className="bg-blue-900 dark:bg-gray-900 text-white dark:text-gray-100 py-10 px-6 md:px-20 transition-colors duration-300">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-10 text-sm px-6 md:px-12 lg:px-20 ml-0 md:ml-64">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 text-sm px-6 md:px-12 lg:px-20">
                 {/* 1. K2 Logo & Tagline */}
                 <div className="flex flex-col">
                     <div className="md:mb-4">

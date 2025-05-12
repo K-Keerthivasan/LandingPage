@@ -99,13 +99,15 @@ export default function OurWorkSection() {
                                     href={`/our_works/${project.route}`}
                                     className="relative group overflow-hidden rounded-lg shadow-lg block"
                                 >
-                                    <Image
-                                        src={project.thumbnailURL}
-                                        alt={project.title}
-                                        width={400}
-                                        height={600}
-                                        className="w-full h-auto object-cover"
-                                    />
+                                    <div className="w-full h-[400px] relative overflow-hidden rounded-lg">
+                                        <Image
+                                            src={project.thumbnailURL}
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+
                                     <span
                                         className="absolute top-1/2 left-0 -translate-y-1/2 -rotate-90 transform origin-left text-sm font-semibold text-yellow-500 tracking-widest">
                                         {project.type === 'video' ? 'Video Project' : 'Image Project'}

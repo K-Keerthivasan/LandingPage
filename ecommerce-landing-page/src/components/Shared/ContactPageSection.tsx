@@ -162,10 +162,10 @@ export default function ContactPageSection() {
                     whileInView="visible" // Animate when in view
                     viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible, only once
                 >
-                    <Link href="/" className="block w-full max-w-sm">
-                        <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg">
+                    <Link href="/contact" className="block w-full max-w-sm">
+                        <div className="relative w-full aspect-[1] overflow-hidden rounded-lg">
                             <Image
-                                src="https://i.imgur.com/bg0Vs3X.jpeg"
+                                src="https://i.imgur.com/gfH4xWS.png"
                                 alt="Contact Logo"
                                 fill
                                 className="object-cover select-none hover:opacity-60 transition-opacity"

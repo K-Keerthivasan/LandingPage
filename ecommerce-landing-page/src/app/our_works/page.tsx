@@ -99,7 +99,7 @@ export default function OurWorksSection() {
                     <div className="text-center text-xl text-gray-600 dark:text-gray-400">No works found.</div>
                 )}
 
-                <div className="space-y-20">
+                <div className="space-y-12 md:space-y-16">
                     {works.map((work, index) => (
                         <motion.section
                             key={work.id}
@@ -110,35 +110,36 @@ export default function OurWorksSection() {
                             className="py-16 md:py-20 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
                         >
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                                {/* Media Section */}
                                 <motion.div
                                     variants={workItemVariants}
-                                    className={`w-full h-auto ${index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'}`}
+                                    className={`relative w-full h-[300px] md:h-[400px] overflow-hidden rounded-xl shadow-2xl ${
+                                        index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'
+                                    }`}
                                 >
                                     {work.type === 'video' ? (
                                         <video
                                             controls
-                                            className="rounded-xl shadow-2xl object-cover w-full h-auto max-h-[400px]"
+                                            className="absolute inset-0 w-full h-full object-cover rounded-xl"
                                             src={work.videoURL}
                                             aria-label={`Video for ${work.title}`}
-                                        >
-                                            Your browser does not support the video tag.
-                                        </video>
+                                        />
                                     ) : (
                                         <Image
                                             src={work.thumbnailURL}
                                             alt={work.title}
-                                            width={700}
-                                            height={400}
-                                            layout="responsive"
-                                            objectFit="cover"
-                                            className="rounded-xl shadow-2xl"
+                                            fill
+                                            className="object-cover rounded-xl"
                                         />
                                     )}
                                 </motion.div>
 
+                                {/* Text Section */}
                                 <motion.div
                                     variants={workItemVariants}
-                                    className={`w-full ${index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1'}`}
+                                    className={`w-full self-center ${
+                                        index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1'
+                                    } flex flex-col justify-center`} // Added flex and justify-center
                                 >
                                     <h3 className="text-3xl md:text-4xl font-bold mb-3 text-blue-900 dark:text-blue-300">
                                         {work.title}
