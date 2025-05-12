@@ -23,8 +23,6 @@ const CATEGORIES = [
     { value: 'video-production', label: 'Video Production' },
     { value: 'graphic-design', label: 'Graphic Design' },
     { value: 'photography', label: 'Photography' },
-    { value: 'marketing', label: 'Marketing' },
-    { value: 'branding', label: 'Branding' },
 ];
 
 
