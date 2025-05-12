@@ -21,6 +21,9 @@ export const getAllWorks = async () => {
         .order('created_at', { ascending: true });
 };
 
+
+
+
 export const addWork = async (work: WorkPayload) => {
     return await supabase.from('our_works').insert([work]).single();
 };

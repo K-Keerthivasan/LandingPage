@@ -1,26 +1,50 @@
-// components/HeroVideoBanner.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef} from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HeroVideoBanner() {
+     const overlayRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            overlayRef.current?.classList.add('opacity-0');
+            setTimeout(() => overlayRef.current?.remove(), 500);
+        }, 1000);
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
-        <div className="relative w-full h-screen overflow-hidden">
-            {/* Background Video */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-                <iframe
-                    src="https://player.vimeo.com/video/1055439402?h=a2364db79e&autoplay=1&muted=1&loop=1&background=1"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                    className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover scale-[2] sm:scale-100"
-                    style={{ background: 'transparent' }}
-                ></iframe>
+        <div className="relative w-full h-screen bg-black overflow-hidden">
+            {/* Black overlay on top */}
+            <div
+                ref={overlayRef}
+                className="absolute inset-0 z-20 bg-black transition-opacity duration-500"
+                style={{ backgroundColor: '#000' }} // Force inline background black
+            >
+
+            <Image
+                    src="https://i.imgur.com/BpOGGhD.jpeg"
+                    alt="Video Preview"
+                    fill
+                    priority
+                    className="object-cover"
+                />
             </div>
 
-            {/* Overlay content */}
-            <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
+            {/* Vimeo Background Video */}
+            <iframe
+                src="https://player.vimeo.com/video/1055439402?h=a2364db79e&autoplay=1&muted=1&loop=1&background=1"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen
+                className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover scale-[2] sm:scale-100 z-0"
+                style={{ backgroundColor: 'black' }}
+            ></iframe>
+
+            {/* Overlay Content */}
+            <div className="relative z-30 flex flex-col items-center justify-center text-center h-full px-4">
                 <h1 className="text-4xl md:text-6xl font-bold text-white">
                     Welcome to <span className="text-yellow-400">My Website</span>
                 </h1>
@@ -33,7 +57,6 @@ export default function HeroVideoBanner() {
                 >
                     Click Here to See More
                 </Link>
-
                 <div className="absolute bottom-6 text-white animate-bounce">
                     <p>Scroll</p>
                     <span className="text-2xl">&#8595;</span>

@@ -4,20 +4,18 @@ import Image from 'next/image';
 
 export async function generateStaticParams() {
     const { data } = await getAllWorks();
-    if (!data) return [];
-
-    return data.map(work => ({
-        slug: work.route,
-    }));
+    console.log('Available slugs:', data?.map(w => w.route));
+    return data?.map(w => ({ slug: w.route })) ?? [];
 }
+
+
 
 export default async function WorkDetailPage({
                                                  params,
                                              }: {
-    params: Promise<{ slug: string }>;
+    params: { slug: string };
 }) {
-    const { slug } = await params;
-
+    const { slug } = params;
     const { data } = await getAllWorks();
     const work = data?.find(w => w.route === slug);
 

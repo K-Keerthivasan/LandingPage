@@ -37,7 +37,7 @@ export default function HomePage() {
                     </p>
 
                     <Link
-                        href="#about"
+                        href="/about"
                         className="text-orange-500 font-medium hover:underline"
                     >
                         Get to know us a bit better

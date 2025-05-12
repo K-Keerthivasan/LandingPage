@@ -1,50 +1,50 @@
-import React from "react";
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion'; // Still needed for the main wrapper animation if desired
+
+// Import the new sub-components
+import AboutIntro from '@/components/about/AboutIntro';
+import AboutJourney from '@/components/about/AboutJourney';
+import AboutWhatIDo from '@/components/about/AboutWhatIDo';
+import AboutToolkit from '@/components/about/AboutToolkit';
+import AboutHowIWork from '@/components/about/AboutHowIWork';
+import AboutCoreValues from '@/components/about/AboutCoreValues';
+import AboutHobbies from '@/components/about/AboutHobbies';
+import AboutResumeDownload from '@/components/about/AboutResumeDownload';
+import AboutCallToAction from '@/components/about/AboutCallToAction';
+import AboutSocialLinks from '@/components/about/AboutSocialLinks';
 
 
-import Link from "next/link";
-
-
-export default function AboutPage() {
+export default function AboutPageSection() {
     return (
-        <div>
-             <div className="pl-0 md:pl-16">
+        <main className="px-6 pt-24 md:pt-32 pb-20 bg-white dark:bg-black text-black dark:text-white transition-colors duration-500 ease-in-out">
+            {/* Optional: Wrap the main div with motion for a container animation */}
+            <motion.div
+                // variants={containerVariants}
+                // initial="hidden"
+                // animate="visible" // Use animate instead of whileInView for the main container
+                className="max-w-6xl mx-auto space-y-20"
+            >
+                {/* Render the sub-components */}
+                <AboutIntro />
+                <AboutJourney />
+                <AboutWhatIDo />
+                <AboutToolkit />
+                <AboutHowIWork />
+                <AboutCoreValues />
+                <AboutHobbies />
+                <AboutResumeDownload />
+                 {/* <AboutTestimonialSnippet /> */}
+                <AboutCallToAction />
+                <AboutSocialLinks />
 
-
-                {/* Your content */}
-
-
-
-                <section className="px-6 py-20 bg-white dark:bg-black text-black dark:text-white transition-colors">
-                    <div className="max-w-4xl mx-auto">
-                        <p className="text-yellow-500 font-semibold mb-2">Our Core</p>
-                        <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 dark:text-blue-300 mb-4">
-                            Strengthen Your Business
-                        </h2>
-                        <div className="w-12 h-1 bg-gray-400 mb-6"/>
-
-                        <p className="mb-4 text-lg leading-relaxed">
-                            As a full-service marketing agency, we serve clients throughout a variety of industries.
-                            Always aiming for high-quality, we believe in measurable results.
-                        </p>
-                        <p className="mb-4 text-lg leading-relaxed">
-                            We employ the latest technology to best understand how to impact your customers.
-                            Only taking on one client per industry per region, we won’t help your competition.
-                            Our goal is to help you build your business.
-                        </p>
-
-                        <Link
-                            href="#about"
-                            className="text-orange-500 font-medium hover:underline"
-                        >
-                            Get to know us a bit better
-                        </Link>
-                    </div>
-                </section>
-
-
-
-            </div>
-        </div>
-
+            </motion.div>
+            {/*
+                Keep global styles here or move to a global CSS file.
+                The wave animation for the hand emoji is defined in AboutIntro.tsx
+                using <style jsx>, which is fine if you prefer component-scoped styles.
+             */}
+        </main>
     );
 }

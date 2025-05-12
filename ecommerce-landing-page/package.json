@@ -25,6 +25,7 @@
     "@tiptap/extension-youtube": "^2.12.0",
     "@tiptap/react": "^2.12.0",
     "@tiptap/starter-kit": "^2.12.0",
+    "framer-motion": "^12.10.5",
     "next": "15.3.2",
     "next-seo": "^6.6.0",
     "next-sitemap": "^4.2.3",

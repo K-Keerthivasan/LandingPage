@@ -33,19 +33,31 @@ export default function Footer() {
     return (
         <footer className="bg-blue-900 dark:bg-gray-900 text-white dark:text-gray-100 py-10 px-6 md:px-20 transition-colors duration-300">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-10 text-sm px-6 md:px-12 lg:px-20 ml-0 md:ml-64">
-                {/* 1. Tagline */}
-                <div>
+                {/* 1. K2 Logo & Tagline */}
+                <div className="flex flex-col">
+                    <div className="md:mb-4">
+                        <Link
+                            href="/"
+                            className="text-white dark:text-gray-100 text-3xl font-semibold italic transition-all duration-300
+                                       hover:scale-110 hover:text-shadow-glow-light dark:hover:[text-shadow:0_0_10px_red] focus:outline-none"
+                        >
+                            K2
+                        </Link>
+                    </div>
                     <h2 className="text-xl font-bold text-yellow-400 dark:text-yellow-300 mb-2">
-                        Digital Marketing &<br />Web Development Agency
+                        Affordable Web, Marketing &<br /> Video Solutions for Growth
                     </h2>
                 </div>
 
                 {/* 2. Static Services */}
                 <div className="space-y-1">
+                    <h2 className="text-xl font-bold text-yellow-400 dark:text-yellow-300 mb-2">
+                        Links
+                    </h2>
+                    <Link href="/about" className="hover:underline">About Me</Link>
+                    <p className="hover:underline"> </p>
                     <Link href="/contact" className="hover:underline">Contact</Link>
-                    <p className="hover:underline">Photography</p>
-                    <p className="hover:underline">Website Emergency Services</p>
-                </div>
+                 </div>
 
                 {/* 3. Dynamic Services from DB */}
                 <div className="space-y-1">
@@ -65,17 +77,17 @@ export default function Footer() {
 
                 <div className="flex flex-col gap-4">
                     <div>
-                        <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Les Chat</h3>
-                        <p>1-502-509-3349</p>
+                        <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Lets Chat</h3>
+                        <p>+1 (226)977-6398</p>
                     </div>
-                    <div>
+                  {/*  <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Hatfield Media</h3>
                         <p>
                             2351 Nelson Miller Parkway<br />
                             Suite #100<br />
                             Louisville, KY 40223
                         </p>
-                    </div>
+                    </div>*/}
                     <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold mb-1">Social</h3>
                         <div className="flex space-x-3 text-lg">
