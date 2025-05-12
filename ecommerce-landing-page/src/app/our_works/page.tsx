@@ -18,6 +18,15 @@ type Work = {
     content: string;
     category?: string;
 };
+const CATEGORIES = [
+    { value: 'web-design', label: 'Web Design' },
+    { value: 'video-production', label: 'Video Production' },
+    { value: 'graphic-design', label: 'Graphic Design' },
+    { value: 'photography', label: 'Photography' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'branding', label: 'Branding' },
+];
+
 
 const OurWorksSection = () => {
     const [works, setWorks] = useState<Work[]>([]);
@@ -88,7 +97,7 @@ const OurWorksSection = () => {
     };
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 py-20 bg-white dark:bg-gray-950 text-black dark:text-white transition-colors duration-500">
+        <div className="px-4 sm:px-6 lg:px-8 py-20 bg-white dark:bg-gray-950 text-black dark:text-white transition-colors duration-500 md:ml-16">
             <div className="max-w-7xl mx-auto">
                 {/* Hero Section */}
                 <motion.div
@@ -113,19 +122,19 @@ const OurWorksSection = () => {
                     transition={{ delay: 0.4 }}
                     className="flex flex-wrap justify-center gap-3 mb-16"
                 >
-                    {['all', 'web', 'video', 'design'].map((filter) => (
+                    {[{ value: 'all', label: 'All Work' }, ...CATEGORIES].map((filter) => (
                         <motion.button
-                            key={filter}
+                            key={filter.value}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={() => setActiveFilter(filter)}
+                            onClick={() => setActiveFilter(filter.value)}
                             className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                                activeFilter === filter
+                                activeFilter === filter.value
                                     ? 'bg-blue-600 text-white shadow-lg'
                                     : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
                             }`}
                         >
-                            {filter === 'all' ? 'All Work' : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                            {filter.label}
                         </motion.button>
                     ))}
                 </motion.div>
@@ -260,36 +269,7 @@ const OurWorksSection = () => {
                     ))}
                 </motion.div>
 
-                {/* View All Button */}
-                {filteredWorks.length > 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        className="text-center mt-20"
-                    >
-                        <Link
-                            href="/our_works"
-                            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
-                        >
-                            Explore Full Portfolio
-                            <svg
-                                className="ml-3 w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                />
-                            </svg>
-                        </Link>
-                    </motion.div>
-                )}
+
             </div>
         </div>
     );

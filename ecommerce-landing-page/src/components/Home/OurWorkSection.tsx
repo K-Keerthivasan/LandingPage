@@ -5,11 +5,19 @@ import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { getAllWorks } from '@/components/backend/our-works/ourworksClient';
 import Link from "next/link";
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
+
+const CATEGORIES = [
+    { value: 'web-design', label: 'Web Design' },
+    { value: 'video-production', label: 'Video Production' },
+    { value: 'graphic-design', label: 'Graphic Design' },
+    { value: 'photography', label: 'Photography' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'branding', label: 'Branding' },
+];
 
 const cardsPerPage = 3;
 
-// Define animation variants for each project card
 const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
@@ -21,9 +29,11 @@ export default function OurWorkSection() {
         thumbnailURL: string;
         type: string;
         route: string;
+        category?: string;
     }[]>([]);
 
     const [startIndex, setStartIndex] = useState(0);
+    const [activeCategory, setActiveCategory] = useState('all');
 
     useEffect(() => {
         const fetchWorks = async () => {
@@ -35,7 +45,7 @@ export default function OurWorkSection() {
 
     const nextCards = () => {
         setStartIndex((prevIndex) =>
-            Math.min(prevIndex + cardsPerPage, projects.length - cardsPerPage)
+            Math.min(prevIndex + cardsPerPage, filteredProjects.length - cardsPerPage)
         );
     };
 
@@ -43,103 +53,197 @@ export default function OurWorkSection() {
         setStartIndex((prevIndex) => Math.max(prevIndex - cardsPerPage, 0));
     };
 
-    const visibleProjects = projects.slice(startIndex, startIndex + cardsPerPage);
+    // Filter projects by active category
+    const filteredProjects = activeCategory === 'all'
+        ? projects
+        : projects.filter(project => project.category === activeCategory);
+
+    const visibleProjects = filteredProjects.slice(startIndex, startIndex + cardsPerPage);
 
     return (
-        <section className="bg-white dark:bg-black text-black dark:text-white px-6 py-20 transition-colors">
+        <section className="bg-white dark:bg-black text-black dark:text-white px-4 sm:px-6 lg:px-8 py-16 md:py-24 transition-colors">
             <div className="max-w-7xl mx-auto">
-                {/* Animate the heading and description */}
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-4xl md:text-6xl font-bold text-blue-900 dark:text-blue-300 mb-4"
-                >
-                    MY WORK
-                </motion.h2>
+                {/* Header Section */}
+                <div className="mb-12 md:mb-16 lg:mb-20">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 dark:text-blue-300 mb-4"
+                    >
+                        My Creative Portfolio
+                    </motion.h2>
+
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: 48 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-300 mb-6"
+                    />
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-base md:text-lg leading-relaxed max-w-4xl text-gray-600 dark:text-gray-300"
+                    >
+                        Explore my collection of professional work spanning web development, video production, and digital design.
+                        Each project represents a unique challenge and creative solution.
+                    </motion.p>
+                </div>
+
+                {/* Category Filters */}
                 <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: 48 }} // Animate width from 0 to 48px (Tailwind's w-12)
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="w-12 h-1 bg-gray-400 mb-6"
-                />
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mb-12 max-w-4xl text-lg leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex flex-wrap justify-center gap-3 mb-12"
                 >
-                    Serving clients in a variety of industries throughout the United States, we specialize in custom
-                    website
-                    design and development, search engine optimization (SEO), and 4K cinematic video production.
-                    Creating powerful
-                    marketing campaigns, we offer a wide range of services from event production, graphic design, social
-                    media and
-                    photography, to compelling content and targeted advertising. Our primary objective is to be your
-                    trusted
-                    marketing resource for years to come.
-                </motion.p>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                            setActiveCategory('all');
+                            setStartIndex(0);
+                        }}
+                        className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                            activeCategory === 'all'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
+                        }`}
+                    >
+                        All Work
+                    </motion.button>
 
+                    {CATEGORIES.map((category) => (
+                        <motion.button
+                            key={category.value}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                                setActiveCategory(category.value);
+                                setStartIndex(0);
+                            }}
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                                activeCategory === category.value
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
+                            }`}
+                        >
+                            {category.label}
+                        </motion.button>
+                    ))}
+                </motion.div>
+
+                {/* Projects Grid */}
                 <div className="relative">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                        {visibleProjects.map((project, idx) => (
-                            <motion.div // Wrap the Link with motion.div
-                                key={idx}
-                                variants={cardVariants} // Apply card animation variants
-                                initial="hidden"
-                                whileInView="visible" // Animate when the card is in view
-                                viewport={{ once: true, amount: 0.4 }} // Animate when 40% visible
-                                // Optional: Add a stagger effect based on index
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            >
-                                <Link
-                                    href={`/our_works/${project.route}`}
-                                    className="relative group overflow-hidden rounded-lg shadow-lg block"
-                                >
-                                    <div className="w-full h-[400px] relative overflow-hidden rounded-lg">
-                                        <Image
-                                            src={project.thumbnailURL}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-
-                                    <span
-                                        className="absolute top-1/2 left-0 -translate-y-1/2 -rotate-90 transform origin-left text-sm font-semibold text-yellow-500 tracking-widest">
-                                        {project.type === 'video' ? 'Video Project' : 'Image Project'}
-                                    </span>
-                                </Link>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Navigation buttons - You could animate these too if desired */}
-                    {projects.length > cardsPerPage && (
-                        <div
-                            className="absolute top-1/2 left-0 right-0 flex justify-between items-center -translate-y-1/2">
-                            <button
-                                onClick={prevCards}
-                                className={`bg-white dark:bg-black text-yellow-500 rounded-full shadow-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${startIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                aria-label="Previous projects"
-                                disabled={startIndex === 0}
-                            >
-                                <ChevronLeftIcon className="w-6 h-6"/>
-                            </button>
-                            <button
-                                onClick={nextCards}
-                                className={`bg-white dark:bg-black text-yellow-500 rounded-full shadow-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 ${startIndex >= projects.length - cardsPerPage ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                aria-label="Next projects"
-                                disabled={startIndex >= projects.length - cardsPerPage}
-                            >
-                                <ChevronRightIcon className="w-6 h-6"/>
-                            </button>
+                    {filteredProjects.length === 0 ? (
+                        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                            No projects found in this category.
                         </div>
+                    ) : (
+                        <>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                {visibleProjects.map((project, idx) => (
+                                    <motion.div
+                                        key={idx}
+                                        variants={cardVariants}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, amount: 0.4 }}
+                                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                        className="group"
+                                    >
+                                        <Link
+                                            href={`/our_works/${project.route}`}
+                                            className="block relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                                        >
+                                            <div className="aspect-[4/3] relative overflow-hidden rounded-xl">
+                                                <Image
+                                                    src={project.thumbnailURL}
+                                                    alt={project.title}
+                                                    fill
+                                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            </div>
+
+                                            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                                <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+                                                <span className="text-sm font-medium text-blue-300">
+                                                    {project.category ?
+                                                        CATEGORIES.find(c => c.value === project.category)?.label ||
+                                                        (project.type === 'video' ? 'Video Production' : 'Web Design')
+                                                        :
+                                                        (project.type === 'video' ? 'Video Production' : 'Web Design')
+                                                    }
+                                                </span>
+                                            </div>
+
+                                            <span className="absolute top-4 right-4 bg-blue-600/90 text-white px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
+                                                {project.category ?
+                                                    CATEGORIES.find(c => c.value === project.category)?.label.split(' ')[0] ||
+                                                    (project.type === 'video' ? 'Video' : 'Web')
+                                                    :
+                                                    (project.type === 'video' ? 'Video' : 'Web')
+                                                }
+                                            </span>
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Navigation buttons */}
+                            {filteredProjects.length > cardsPerPage && (
+                                <div className="flex justify-center mt-8 md:mt-12 space-x-4">
+                                    <button
+                                        onClick={prevCards}
+                                        className={`flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                            startIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                                        }`}
+                                        aria-label="Previous projects"
+                                        disabled={startIndex === 0}
+                                    >
+                                        <ChevronLeftIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                    </button>
+                                    <button
+                                        onClick={nextCards}
+                                        className={`flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                            startIndex >= filteredProjects.length - cardsPerPage ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                                        }`}
+                                        aria-label="Next projects"
+                                        disabled={startIndex >= filteredProjects.length - cardsPerPage}
+                                    >
+                                        <ChevronRightIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                    </button>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
+
+                {/* View All Button */}
+                {projects.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="text-center mt-12 md:mt-16"
+                    >
+                        <Link
+                            href="/our_works"
+                            className="inline-flex items-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                        >
+                            View Full Portfolio
+                            <ChevronRightIcon className="ml-2 w-5 h-5" />
+                        </Link>
+                    </motion.div>
+                )}
             </div>
         </section>
     );
