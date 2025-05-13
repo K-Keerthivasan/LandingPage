@@ -59,11 +59,7 @@ export default function AboutWhatIDo() {
                     </p>
                 </motion.div>
             </div>
-            <motion.div variants={itemVariants}>
-                <Link href="/our-works" className="inline-block mt-8 px-8 py-4 bg-blue-900 dark:bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors duration-300 transform hover:scale-105">
-                    Explore My Portfolio <span className="ml-2">→</span>
-                </Link>
-            </motion.div>
+
         </motion.section>
     );
 }

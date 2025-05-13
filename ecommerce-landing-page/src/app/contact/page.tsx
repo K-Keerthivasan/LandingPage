@@ -90,7 +90,7 @@ export default function Contact() {
                         >
                             <motion.div variants={linkItemVariants}>
                                 <Link
-                                    href="https://linkedin.com/in/yourusername"
+                                    href="https://www.linkedin.com/in/kkvasan/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 hover:text-blue-400 transition-colors"
@@ -102,7 +102,7 @@ export default function Contact() {
 
                             <motion.div variants={linkItemVariants}>
                                 <Link
-                                    href="https://upwork.com/freelancers/yourid"
+                                    href="https://www.upwork.com/freelancers/~01a62123f026359fd6?mp_source=share"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 hover:text-green-400 transition-colors"
@@ -114,7 +114,7 @@ export default function Contact() {
 
                             <motion.div variants={linkItemVariants}>
                                 <Link
-                                    href="https://github.com/yourusername"
+                                    href="https://github.com/K-Keerthivasan"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 hover:text-gray-300 transition-colors"
@@ -123,6 +123,8 @@ export default function Contact() {
                                     GitHub
                                 </Link>
                             </motion.div>
+
+
 
                             <motion.div variants={linkItemVariants}>
                                 <Link
@@ -133,23 +135,6 @@ export default function Contact() {
                                     Email
                                 </Link>
                             </motion.div>
-                        </motion.div>
-
-                        {/* Testimonial Section */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, amount: 0.5 }}
-                            transition={{ duration: 0.5, delay: 0.6 }}
-                        >
-                            {/*<div>
-                                <h3 className="text-xl font-semibold text-blue-800 dark:text-blue-300 mb-2">
-                                    What Clients Say
-                                </h3>
-                                <blockquote className="italic border-l-4 border-yellow-400 pl-4 text-sm text-gray-700 dark:text-gray-300">
-                                    “Keerthi created an amazing motion edit for our product video. Fast turnaround and top-notch quality!”
-                                </blockquote>
-                            </div>*/}
                         </motion.div>
                     </motion.div>
 

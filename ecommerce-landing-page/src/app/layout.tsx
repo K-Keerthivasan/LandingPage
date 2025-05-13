@@ -10,8 +10,11 @@ import ClientSidebarWrapper from "@/components/Shared/ClientSidebarWrapper";
 
 
 export const metadata = {
-    title: 'Your App',
-    description: 'Description',
+    title: 'K2 Digital Media',
+    description: 'Creative Web Design and Digital Media.',
+    icons: {
+        icon: '/Logo.png',
+    },
 };
 
 
