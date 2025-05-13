@@ -47,15 +47,15 @@ export default function HeroVideoBanner() {
                 loop
                 playsInline
                 preload="auto"
-                className="  absolute top-1/2 left-1/2  w-[200vw] h-[200vh] -translate-x-1/2 -translate-y-1/2
+                className="  absolute top-1/2 left-1/2  w-[100vw] h-[100vh] -translate-x-1/2 -translate-y-1/2
   object-cover z-0
-  scale-[1.5] sm:scale-100
+  scale-[1] sm:scale-100
   transition-transform duration-700 ease-in-out
   bg-black
 "
                 style={{ backgroundColor: 'black' }}
             >
-                <source src="/showreel_fanshawe_fall.mp4" type="video/mp4" />
+                <source src="/showreel_fanshawe_fall.mov" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
