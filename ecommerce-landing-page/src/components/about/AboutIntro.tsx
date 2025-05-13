@@ -28,11 +28,16 @@ const introVariants = {
 export default function AboutIntro() {
     const [showFunFact, setShowFunFact] = useState(false);
     const funFacts = [
-        "I can edit videos faster than I can cook a two-minute noodle packet.",
-        "My first website was a fan page for a cartoon character using GeoCities.",
-        "I have a ridiculous collection of vintage film cameras I rarely use.",
-        "I once spent 48 hours straight on a coding challenge fueled purely by coffee and bad dad jokes.",
+        "I’ve hit refresh more times than I’ve blinked today.",
+        "I once designed a game level so hard, even I rage-quit during testing.",
+        "My render times have taught me patience in ways meditation never could.",
+        "I’ve built a portfolio site just to procrastinate building my actual portfolio.",
+        "I once rotoscoped a coffee cup longer than it took to drink it.",
+        "My CSS animations have more keyframes than my last short film.",
+        "I’ve spent more time debugging than sleeping — and weirdly, I enjoy it.",
+        "My game assets folder has more 'final_v2_reallyFinal_THISone' files than actual textures."
     ];
+
     const [currentFunFact, setCurrentFunFact] = useState(funFacts[0]);
 
     const toggleFunFact = () => {

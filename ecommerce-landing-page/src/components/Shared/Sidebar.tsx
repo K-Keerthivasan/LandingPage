@@ -102,7 +102,7 @@ export default function Sidebar() {
                             MY WORK
                         </Link>
                         <Link href="/about" onClick={() => setIsOpen(false)} className="hover:underline">
-                            ABOUT US
+                            ABOUT ME
                         </Link>
 
                         {/* Dynamic Services */}

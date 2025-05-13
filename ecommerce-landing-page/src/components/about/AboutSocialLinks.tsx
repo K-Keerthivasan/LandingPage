@@ -48,7 +48,7 @@ export default function AboutSocialLinks() {
                     variants={itemVariants} // Apply scroll-in animation
                     whileHover={{ scale: 1.2, rotate: 5, color: '#6e5494' }} // Hover animation: scale, rotate, and color (GitHub purple)
                     transition={{ duration: 0.2 }} // Hover transition duration
-                    href="https://github.com/yourusername" // Replace with actual GitHub URL
+                    href="https://github.com/K-Keerthivasan" // Replace with actual GitHub URL
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300" // Base color and transition
@@ -62,7 +62,7 @@ export default function AboutSocialLinks() {
                     variants={itemVariants} // Apply scroll-in animation
                     whileHover={{ scale: 1.2, rotate: 5, color: '#E1306C' }} // Hover animation: scale, rotate, and color (Instagram pink/purple)
                     transition={{ duration: 0.2 }} // Hover transition duration
-                    href="https://instagram.com/yourusername" // Replace with actual Instagram URL
+                    href="https://www.instagram.com/kkvasan_/" // Replace with actual Instagram URL
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300" // Base color and transition
@@ -76,7 +76,7 @@ export default function AboutSocialLinks() {
                     variants={itemVariants} // Apply scroll-in animation
                     whileHover={{ scale: 1.2, rotate: 5, color: '#0077B5' }} // Hover animation: scale, rotate, and color (LinkedIn blue)
                     transition={{ duration: 0.2 }} // Hover transition duration
-                    href="https://linkedin.com/in/yourusername" // Replace with actual LinkedIn URL
+                    href="https://www.linkedin.com/in/kkvasan/" // Replace with actual LinkedIn URL
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300" // Base color and transition
@@ -90,7 +90,7 @@ export default function AboutSocialLinks() {
                     variants={itemVariants} // Apply scroll-in animation
                     whileHover={{ scale: 1.2, rotate: 5, color: '#FF0000' }} // Hover animation: scale, rotate, and color (YouTube red)
                     transition={{ duration: 0.2 }} // Hover transition duration
-                    href="https://youtube.com/yourchannel" // Replace with actual YouTube URL
+                    href="https://www.youtube.com/@JKR-Film" // Replace with actual YouTube URL
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300" // Base color and transition
