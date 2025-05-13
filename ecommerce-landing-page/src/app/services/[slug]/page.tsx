@@ -13,8 +13,8 @@ export async function generateStaticParams() {
 
 export const dynamic = 'force-dynamic';
 
-export default async function ServiceDetailPage(props: { params: { slug: string } }) {
-    const { slug } = props.params;
+export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
+    const { slug } = params;
 
     const { data } = await getAllServices();
     const service = data?.find(s => s.route === slug);

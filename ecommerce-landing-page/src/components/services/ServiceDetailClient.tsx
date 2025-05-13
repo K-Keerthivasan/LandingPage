@@ -4,7 +4,19 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export default function ServiceDetailClient({ service }: { service: any }) {
+export type Service = {
+    id: number;
+    title: string;
+    description: string;
+    thumbnailURL: string;
+    videoURL: string;
+    type: 'image' | 'video';
+    route: string;
+    content: string;
+    created_at?: string;
+};
+
+export default function ServiceDetailClient({ service }: { service: Service }) {
     return (
         <motion.main
             initial={{ opacity: 0, y: 30 }}
