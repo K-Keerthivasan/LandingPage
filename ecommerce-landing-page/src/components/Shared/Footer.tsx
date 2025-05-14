@@ -82,7 +82,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Email</h3>
-                        <p>kkvasan99@gmail.com</p>
+                        <p>kkvasan99@outlook.com</p>
                     </div>
                     {/*  <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Hatfield Media</h3>
