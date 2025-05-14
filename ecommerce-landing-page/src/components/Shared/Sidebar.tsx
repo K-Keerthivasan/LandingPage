@@ -128,7 +128,7 @@ export default function Sidebar() {
 
                     <div className="mt-10 text-sm">
                         <p>+1 (226)-977-6398</p>
-                        <p>kkvasan99@gmail.com</p>
+                        <p>kkvasan99@outlook.com</p>
                     </div>
                 </div>
 
