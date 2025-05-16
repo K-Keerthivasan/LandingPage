@@ -10,11 +10,12 @@ import ClientSidebarWrapper from "@/components/Shared/ClientSidebarWrapper";
 
 
 export const metadata = {
-    title: 'K2 Digital Media',
-    description: 'Creative Web Design and Digital Media.',
-    icons: {
-        icon: '/Logo.png',
+    metadataBase: new URL('https://k2digitalmedia.ca'),
+    title: {
+        default: 'K2Digital Media',
+        template: '%s | K2Digital Media',
     },
+    description: 'Freelance services in web development, VFX, and editing by Keerthi.',
 };
 
 

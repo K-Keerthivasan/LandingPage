@@ -1,7 +1,9 @@
+// app/our-works/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { getAllWorks } from '@/components/backend/our-works/ourworksClient';
 import Image from 'next/image';
 
+// Generate static paths
 export async function generateStaticParams() {
     const { data } = await getAllWorks();
     console.log('Available slugs:', data?.map(w => w.route));
@@ -10,6 +12,46 @@ export async function generateStaticParams() {
 
 export const dynamic = 'force-dynamic';
 
+// ✅ Dynamic Metadata for each work
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const { data } = await getAllWorks();
+    const work = data?.find(w => w.route === params.slug);
+
+    if (!work) {
+        return {
+            title: 'Work Not Found | K2Digital Media',
+            description: 'The requested project is not available.',
+        };
+    }
+
+    return {
+        title: `${work.title} | Our Work - K2Digital Media`,
+        description: work.description || `View details of ${work.title} by K2Digital Media.`,
+        openGraph: {
+            title: `${work.title} | Our Work - K2Digital Media`,
+            description: work.description || '',
+            url: `https://k2digitalmedia.ca/our-works/${params.slug}`,
+            siteName: 'K2Digital Media',
+            images: [
+                {
+                    url: work.thumbnailURL || '/Logo.png',
+                    width: 1200,
+                    height: 630,
+                    alt: work.title,
+                },
+            ],
+            type: work.type === 'video' ? 'video.other' : 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${work.title} | K2Digital Media`,
+            description: work.description,
+            images: [work.thumbnailURL || '/Logo.png'],
+        },
+    };
+}
+
+// Render the work detail page
 export default async function WorkDetailPage({
                                                  params,
                                              }: {

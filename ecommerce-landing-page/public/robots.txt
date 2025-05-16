@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://k2digitalmedia.ca
+
+# Sitemaps
+Sitemap: https://k2digitalmedia.ca/sitemap.xml

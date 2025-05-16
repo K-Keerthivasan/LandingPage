@@ -12,8 +12,8 @@ export async function POST(req: Request) {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `response=${token}&secret=${secret}`,
-    });
 
+    });
     const data = await response.json();
     return NextResponse.json({ success: data.success });
 }
