@@ -15,7 +15,10 @@ export const metadata = {
         default: 'K2Digital Media',
         template: '%s | K2Digital Media',
     },
-    description: 'Freelance services in web development, VFX, and editing by Keerthi.',
+    description: 'Creative Web Design and Digital Media.',
+    icons: {
+        icon: '/Logo.png',
+    }
 };
 
 
