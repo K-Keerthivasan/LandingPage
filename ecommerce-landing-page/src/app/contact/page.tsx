@@ -128,7 +128,7 @@ export default function Contact() {
 
                             <motion.div variants={linkItemVariants}>
                                 <Link
-                                    href="mailto:kkvasan99@outlook.com"
+                                    href="mailto:kkvasan@k2digitalmedia.ca"
                                     className="flex items-center gap-2 hover:text-red-400 transition-colors"
                                 >
                                     <FaEnvelope className="w-4 h-4" />

@@ -57,6 +57,8 @@ export default function Footer() {
                     <Link href="/about" className="hover:underline">About Me</Link>
                     <p className="hover:underline"> </p>
                     <Link href="/contact" className="hover:underline">Contact</Link>
+                    <p className="hover:underline"> </p>
+                    <Link href="/privacy_policy" className="hover:underline">Privacy Policy</Link>
                  </div>
 
                 {/* 3. Dynamic Services from DB */}
@@ -82,7 +84,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Email</h3>
-                        <p>kkvasan99@outlook.com</p>
+                        <p>kkvasan@k2digitalmedia.ca</p>
                     </div>
                     {/*  <div>
                         <h3 className="text-yellow-400 dark:text-yellow-300 font-semibold">Hatfield Media</h3>
