@@ -8,6 +8,7 @@ import '@fontsource/inter';
 import '@fontsource/roboto';
 import "@fontsource/cascadia-code/500-italic.css";
 
+// ✅ Best way to set metadata in App Router
 export const metadata = {
     metadataBase: new URL('https://k2digitalmedia.ca'),
     title: {
@@ -15,6 +16,13 @@ export const metadata = {
         template: '%s | K2Digital Media',
     },
     description: 'Creative Web Design and Digital Media.',
+    openGraph: {
+        images: ['/Logo.png'],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        images: ['/Logo.png'],
+    },
     icons: {
         icon: '/Logo.png',
     },
@@ -24,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
         <head>
-            {/* ✅ Add Structured Data for Google to show logo */}
+
+            <link rel="icon" type="image/png" href="/Logo.png" sizes="any" />
+
             <Script
                 id="structured-data"
                 type="application/ld+json"
@@ -41,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
             <meta property="og:image" content="https://k2digitalmedia.ca/Logo.png" />
             <meta name="twitter:image" content="https://k2digitalmedia.ca/Logo.png" />
+            <title></title>
         </head>
         <body className="bg-white dark:bg-black text-black dark:text-white">
         <ThemeProvider>
