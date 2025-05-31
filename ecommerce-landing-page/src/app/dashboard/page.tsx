@@ -1,20 +1,17 @@
 'use client';
 
-import {useProtectRoute} from '@/components/backend/protectRoute';
 import {signOutUser} from '@/components/backend/auth';
 import {useRouter} from 'next/navigation';
 import Link from "next/link";
 
 export default function DashboardPage() {
-    const {loading} = useProtectRoute();
-    const router = useRouter();
+     const router = useRouter();
 
     const handleLogout = async () => {
         await signOutUser();
         router.push('/login');
     };
 
-    if (loading) return <p className="text-center mt-20 text-lg">Loading...</p>;
 
     return (
         <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white px-6 py-20 transition-colors">

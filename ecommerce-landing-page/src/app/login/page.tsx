@@ -58,7 +58,7 @@ export default function LoginPage() {
                     />
                     <div className="mt-4 mb-4">
                         <HCaptcha
-                            sitekey="e5d291c6-ea70-42fa-a1a2-ae86dc02916c"
+                            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!}
                             onVerify={setToken}
                             ref={captchaRef}
                             theme="dark"
