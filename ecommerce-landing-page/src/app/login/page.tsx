@@ -1,17 +1,16 @@
 'use client';
 
-import {useState, useRef} from 'react';
+import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {signInWithEmail} from '@/components/backend/auth';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+
 
 export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
+    const [token] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    const captchaRef = useRef<HCaptcha | null>(null);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -56,14 +55,7 @@ export default function LoginPage() {
                         onChange={e => setPassword(e.target.value)}
                         className="w-full mb-3 p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-black dark:text-white rounded"
                     />
-                    <div className="mt-4 mb-4">
-                        <HCaptcha
-                            sitekey="e5d291c6-ea70-42fa-a1a2-ae86dc02916c"
-                            onVerify={setToken}
-                            ref={captchaRef}
-                            theme="dark"
-                        />
-                    </div>
+
                     {errorMsg && (
                         <p className="text-red-500 text-sm mb-2 dark:text-red-400">{errorMsg}</p>
                     )}
