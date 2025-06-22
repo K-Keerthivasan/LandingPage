@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion'; // Still needed for the main wrapper animation if desired
 
 // Import the new sub-components
 import AboutIntro from '@/components/about/AboutIntro';
@@ -14,6 +12,8 @@ import AboutHobbies from '@/components/about/AboutHobbies';
 import AboutResumeDownload from '@/components/about/AboutResumeDownload';
 import AboutCallToAction from '@/components/about/AboutCallToAction';
 import AboutSocialLinks from '@/components/about/AboutSocialLinks';
+import React from 'react';
+import { motion } from 'framer-motion'; // Still needed for the main wrapper animation if desired
 
 
 export default function AboutPageSection() {

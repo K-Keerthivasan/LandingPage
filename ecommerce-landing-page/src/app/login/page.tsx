@@ -1,27 +1,20 @@
+// pages/LoginPage.tsx (or app/login/page.tsx)
 'use client';
 
-import {useState} from 'react';
-import {useRouter} from 'next/navigation';
-import {signInWithEmail} from '@/components/backend/auth';
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { signInWithEmail } from '@/components/backend/auth'; // Ensure this function is correct
 
 export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [token] = useState('');
+    // const [token] = useState(''); // <--- REMOVE THIS LINE
     const [errorMsg, setErrorMsg] = useState('');
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (!token) {
-            setErrorMsg('Please verify hCaptcha first');
-            return;
-        }
-
-        const {error} = await signInWithEmail(email, password, token);
-
+        const { error } = await signInWithEmail(email, password);
         if (error) setErrorMsg(error.message);
         else router.push('/dashboard');
     };

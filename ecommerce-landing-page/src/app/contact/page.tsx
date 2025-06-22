@@ -5,10 +5,12 @@ import ContactPageSection from "@/components/Shared/ContactPageSection";
 import Link from "next/link";
 import { FaLinkedin, FaGithub, FaEnvelope, FaBriefcase } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { easeOut } from 'framer-motion';
+
 
 const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut  } },
 };
 
 const listContainerVariants = {
@@ -20,12 +22,12 @@ const listContainerVariants = {
 
 const listItemVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: easeOut  } },
 };
 
 const linkItemVariants = {
     hidden: { opacity: 0, x: 20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: easeOut  } },
 };
 
 export default function Contact() {

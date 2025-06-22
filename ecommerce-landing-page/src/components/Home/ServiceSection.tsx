@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion'; // Import motion
+import { easeOut } from 'framer-motion';
 
 type Service = {
     id: number;
@@ -17,18 +18,19 @@ type Service = {
     content: 'string',
 };
 
-import { supabase } from '@/components/backend/supabaseClient'; // adjust path as needed
+import { createBrowserSupabase } from '@/app/lib/client';
+const supabase = await createBrowserSupabase();
 
 // Define animation variants for each service item
 const itemVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
 // Define staggered animation for elements within the item
 const contentVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
 };
 
 

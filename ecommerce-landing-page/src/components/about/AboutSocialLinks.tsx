@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import { easeOut } from 'framer-motion';
 import { FaGithub, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 // Animation variants (can be defined here or passed as props)
@@ -13,7 +13,7 @@ const sectionVariants = {
         y: 0,
         transition: {
             duration: 0.8,
-            ease: "easeOut",
+            ease: easeOut,
             staggerChildren: 0.1 // Stagger social icons
         }
     },

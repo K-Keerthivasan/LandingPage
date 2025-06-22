@@ -1,21 +1,20 @@
 // app/our-works/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { getAllWorks } from '@/components/backend/our-works/ourworksClient';
 import Image from 'next/image';
+import {getWorkBySlug} from "@/app/lib/ourworksServer";
+import {createStaticSupabase} from "@/app/lib/static-supabase";
 
-// Generate static paths
-export async function generateStaticParams() {
-    const { data } = await getAllWorks();
-    console.log('Available slugs:', data?.map(w => w.route));
-    return data?.map(w => ({ slug: w.route })) ?? [];
-}
 
 export const dynamic = 'force-dynamic';
+export async function generateStaticParams() {
+    const supabase = createStaticSupabase();
+    const { data } = await supabase.from('our_works').select('route');
+    return data?.map((w) => ({ slug: w.route })) ?? [];
+}
 
-// ✅ Dynamic Metadata for each work
+// Metadata per slug
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const { data } = await getAllWorks();
-    const work = data?.find(w => w.route === params.slug);
+    const { data: work } = await getWorkBySlug(params.slug);
 
     if (!work) {
         return {
@@ -45,21 +44,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         twitter: {
             card: 'summary_large_image',
             title: `${work.title} | K2Digital Media`,
-            description: work.description,
+            description: work.description || '',
             images: [work.thumbnailURL || '/Logo.png'],
         },
     };
 }
 
-// Render the work detail page
-export default async function WorkDetailPage({
-                                                 params,
-                                             }: {
-    params: { slug: string };
-}) {
-    const { slug } = params;
-    const { data } = await getAllWorks();
-    const work = data?.find(w => w.route === slug);
+// Page component
+export default async function WorkDetailPage({ params }: { params: { slug: string } }) {
+    const { data: work } = await getWorkBySlug(params.slug);
 
     if (!work) return notFound();
 

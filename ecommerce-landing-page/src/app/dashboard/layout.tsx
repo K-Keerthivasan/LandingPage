@@ -1,19 +1,21 @@
 // app/dashboard/layout.tsx
+import {redirect} from 'next/navigation';
+import {createServerSupabase} from "@/app/lib/server";
 
-import { cookies } from 'next/headers';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { redirect } from 'next/navigation';
 
-export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-    const supabase = createServerComponentClient({ cookies });
+export default async function DashboardLayout({
+                                                  children,
+                                              }: {
+    children: React.ReactNode;
+}) {
+    const supabase = await createServerSupabase();
     const {
-        data: { session },
-    } = await supabase.auth.getSession();
+        data: {user},
+    } = await supabase.auth.getUser();
 
-    // If session doesn't exist, redirect to login
-    if (!session) {
-        redirect('/login');
-    }
+    console.log('Supabase user:', user);
+
+    if (!user) redirect('/login');
 
     return <>{children}</>;
 }

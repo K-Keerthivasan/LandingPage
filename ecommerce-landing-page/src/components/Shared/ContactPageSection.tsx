@@ -1,16 +1,18 @@
 'use client';
 
 import React, {useRef, useState} from 'react';
-import { supabase } from '@/components/backend/supabaseClient';
+import { createBrowserSupabase } from '@/app/lib/client';
+const supabase = await createBrowserSupabase();
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { easeOut } from 'framer-motion';
 
 // --- Animation Variants ---
 const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
 const formContainerVariants = {
@@ -24,12 +26,12 @@ const formContainerVariants = {
 
 const formElementVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
 };
 
 const imageVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: easeOut } },
 };
 
 const legalTextVariants = {

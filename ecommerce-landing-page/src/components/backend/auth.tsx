@@ -1,22 +1,24 @@
-import { supabase } from './supabaseClient';
+// components/backend/auth.ts
+import { createBrowserSupabase } from '@/app/lib/client';
 
-export const signInWithEmail = async (email: string, password: string, captchaToken: string) => {
-    return await supabase.auth.signInWithPassword({
+const supabase = createBrowserSupabase();
+
+export async function signInWithEmail(email: string, password: string) {
+    const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        options: {
-            captchaToken,
-        },
     });
-};
+    return { data, error };
+}
 
-export const signOutUser = async () => {
-    await supabase.auth.signOut();
-};
+export async function signOutUser() {
+    const { error } = await supabase.auth.signOut();
+    return { error };
+}
+
 
 export const getUserSession = async () => {
     const { data, error } = await supabase.auth.getSession();
     if (error) throw error;
     return data?.session?.user ?? null;
 };
-

@@ -1,5 +1,7 @@
-import { supabase } from '../supabaseClient';
+'use client';
 
+import { createBrowserSupabase } from '@/app/lib/client';
+const supabase = await createBrowserSupabase();
 export type Service = {
     id: number;
     title: string;

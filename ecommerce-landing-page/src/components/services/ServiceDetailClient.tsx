@@ -1,5 +1,5 @@
 // components/frontend/ServiceDetailClient.tsx
-'use client';
+'use client'
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -17,8 +17,10 @@ export type Service = {
 };
 
 export default function ServiceDetailClient({ service }: { service: Service }) {
+    const MotionMain = motion('main');
+
     return (
-        <motion.main
+        <MotionMain
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -75,6 +77,6 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                 className="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ __html: service.content }}
             />
-        </motion.main>
+        </MotionMain>
     );
 }

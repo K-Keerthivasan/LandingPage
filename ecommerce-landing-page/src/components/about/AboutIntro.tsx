@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
+import { easeOut } from 'framer-motion';
 // Placeholder image - replace with Keerthi's actual photo
 const profilePictureUrl = '/keerthi.png'; // Make sure this path is correct
 
@@ -11,11 +11,11 @@ const profilePictureUrl = '/keerthi.png'; // Make sure this path is correct
 const introVariants = {
     image: {
         initial: { opacity: 0, x: -50 },
-        animate: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+        animate: { opacity: 1, x: 0, transition: { duration: 0.8, ease: easeOut } },
     },
     text: {
         initial: { opacity: 0, x: 50 },
-        animate: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } },
+        animate: { opacity: 1, x: 0, transition: { duration: 0.8, ease: easeOut, delay: 0.2 } },
     },
     funFact: {
         initial: { opacity: 0, y: 20 },

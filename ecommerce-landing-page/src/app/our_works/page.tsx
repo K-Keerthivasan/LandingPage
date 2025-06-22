@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '@/components/backend/supabaseClient';
+import { createBrowserSupabase } from '@/app/lib/client';
+const supabase = await createBrowserSupabase();
+import { easeOut } from 'framer-motion';
 
 type Work = {
     id: number;
@@ -79,7 +81,7 @@ const OurWorksSection = () => {
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: [0.2, 0.8, 0.2, 1]
+                ease: easeOut
             }
         }
     };

@@ -6,6 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { getAllWorks } from '@/components/backend/our-works/ourworksClient';
 import Link from "next/link";
 import { motion } from 'framer-motion';
+import { easeOut } from 'framer-motion';
 
 const CATEGORIES = [
     { value: 'web-design', label: 'Web Design' },
@@ -18,7 +19,7 @@ const cardsPerPage = 3;
 
 const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
 };
 
 export default function OurWorkSection() {

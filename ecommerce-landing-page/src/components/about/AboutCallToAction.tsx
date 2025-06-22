@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { easeOut } from 'framer-motion';
 
 // Animation variants (can be defined here or passed as props)
 const sectionVariants = {
@@ -12,7 +13,7 @@ const sectionVariants = {
         y: 0,
         transition: {
             duration: 0.8,
-            ease: "easeOut",
+            ease: easeOut,
             staggerChildren: 0.3 // Stagger text and button
         }
     },

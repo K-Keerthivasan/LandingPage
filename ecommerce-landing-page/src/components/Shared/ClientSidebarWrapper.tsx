@@ -1,5 +1,7 @@
 // components/ClientSidebarWrapper.tsx
+/*
 'use client';
+*/
 
 import Sidebar from './Sidebar';
 
