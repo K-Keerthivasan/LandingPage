@@ -15,19 +15,11 @@ type Service = {
     videoURL: string;
     route: string;
     type: 'image' | 'video';
-    category: string;
     created_at?: string;
     content: string;
 };
 
-const CATEGORIES = [
-    { value: 'web-development', label: 'Web Development' },
-    { value: 'video-production', label: 'Video Production' },
-    { value: 'graphic-design', label: 'Graphic Design' },
-    { value: 'seo', label: 'SEO' },
-    { value: 'social-media', label: 'Social Media' },
-    { value: 'marketing', label: 'Marketing' },
-];
+
 
 export default function ServicesWriteOnly() {
     const router = useRouter();
@@ -45,7 +37,6 @@ export default function ServicesWriteOnly() {
         videoURL: '',
         route: '',
         type: 'image',
-        category: 'web-development',
         content: '',
     });
 
@@ -80,18 +71,18 @@ export default function ServicesWriteOnly() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!form.title || !form.description || !form.thumbnailURL || !form.category) {
+        if (!form.title || !form.description || !form.thumbnailURL ) {
             alert('Please fill all required fields.');
             return;
         }
 
         const html = editorRef.current?.getContent() || '';
-
+        console.log('Submitting content:', html);
         if (editingId) {
             await updateService(editingId, { ...form, content: html });
         } else {
-            await addService({ ...form, content: html });
-        }
+            const res = await addService({ ...form, content: html });
+            console.log('Add result:', res);        }
 
         editorRef.current?.clearContent();
         setForm({
@@ -101,7 +92,6 @@ export default function ServicesWriteOnly() {
             videoURL: '',
             route: '',
             type: 'image',
-            category: 'web-development',
             content: '',
         });
         setEditingId(null);
@@ -119,7 +109,6 @@ export default function ServicesWriteOnly() {
                 videoURL: selected.videoURL,
                 route: selected.route,
                 type: selected.type,
-                category: selected.category || 'web-development',
                 content: selected.content,
             });
         }
@@ -153,7 +142,6 @@ export default function ServicesWriteOnly() {
                             <thead className="bg-gray-50 dark:bg-gray-800">
                             <tr>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Title</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Type</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
                             </tr>
@@ -163,9 +151,6 @@ export default function ServicesWriteOnly() {
                                 <tr key={service.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                                         {service.title}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                        {CATEGORIES.find(cat => cat.value === service.category)?.label || service.category}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                         {service.type.charAt(0).toUpperCase() + service.type.slice(1)}
@@ -216,22 +201,6 @@ export default function ServicesWriteOnly() {
                                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                     required
                                 />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category *</label>
-                                <select
-                                    value={form.category}
-                                    onChange={e => setForm({ ...form, category: e.target.value })}
-                                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
-                                    required
-                                >
-                                    {CATEGORIES.map(category => (
-                                        <option key={category.value} value={category.value}>
-                                            {category.label}
-                                        </option>
-                                    ))}
-                                </select>
                             </div>
 
                             <div>
@@ -319,7 +288,6 @@ export default function ServicesWriteOnly() {
                                                 videoURL: '',
                                                 route: '',
                                                 type: 'image',
-                                                category: 'web-development',
                                                 content: '',
                                             });
                                             setEditingId(null);
