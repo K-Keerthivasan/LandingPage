@@ -1,6 +1,5 @@
 // app/services/[slug]/page.tsx
 
-
 import { notFound } from 'next/navigation';
 
 import ServiceDetailClient from '@/components/services/ServiceDetailClient';
@@ -18,7 +17,6 @@ export async function generateStaticParams() {
         slug: service.route,
     }));
 }
-
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
     const supabase = createStaticSupabase();
