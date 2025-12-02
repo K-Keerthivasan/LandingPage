@@ -98,7 +98,7 @@ export default function Sidebar() {
 
                     <nav className="flex flex-col gap-4 text-lg">
                         {/* Static Top Items */}
-                        <Link href="/our_works" onClick={() => setIsOpen(false)} className="hover:underline">
+                        <Link href="/our-works" onClick={() => setIsOpen(false)} className="hover:underline">
                             MY WORK
                         </Link>
                         <Link href="/about" onClick={() => setIsOpen(false)} className="hover:underline">

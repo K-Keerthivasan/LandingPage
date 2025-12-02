@@ -157,7 +157,7 @@ export default function OurWorkSection() {
                                         className="group"
                                     >
                                         <Link
-                                            href={`/our_works/${project.route}`}
+                                            href={`/our-works/${project.route}`}
                                             className="block relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                                         >
                                             <div className="aspect-[4/3] relative overflow-hidden rounded-xl">
@@ -235,7 +235,7 @@ export default function OurWorkSection() {
                         className="text-center mt-12 md:mt-16"
                     >
                         <Link
-                            href="/our_works"
+                            href="/our-works"
                             className="inline-flex items-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
                         >
                             View Full Portfolio

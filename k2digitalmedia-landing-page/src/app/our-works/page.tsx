@@ -41,7 +41,7 @@ const OurWorksSection = () => {
             setError(null);
             try {
                 const { data, error } = await supabase
-                    .from('our_works')
+                    .from('our-works')
                     .select('*')
                     .order('created_at', { ascending: false });
 
@@ -189,7 +189,7 @@ const OurWorksSection = () => {
                             onHoverStart={() => setHoveredIndex(index)}
                             onHoverEnd={() => setHoveredIndex(null)}
                         >
-                            <Link href={`/our_works/${work.route}`} className="block">
+                            <Link href={`/our-works/${work.route}`} className="block">
                                 {/* Media Container */}
                                 <motion.div
                                     variants={imageHoverVariants}
