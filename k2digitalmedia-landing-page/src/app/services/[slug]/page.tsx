@@ -6,8 +6,10 @@ import ServiceDetailClient from '@/components/services/ServiceDetailClient';
 import {getAllServices} from "@/app/lib/ourserviceServer";
 import {createStaticSupabase} from "@/app/lib/static-supabase";
 
+export const revalidate = 3600;
 
-export const dynamic = 'force-dynamic';
+//export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
     const supabase = createStaticSupabase();
     const { data } = await supabase.from('services').select('route');

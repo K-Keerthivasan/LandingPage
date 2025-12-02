@@ -5,6 +5,20 @@ import OurWorksSection from './OurWorksSection';
 // Revalidate every hour so bots get stable HTML, but it stays fresh
 export const revalidate = 3600;
 
+// ✅ Page-specific metadata for SEO
+export const metadata = {
+    title: 'Our Works | K2Digital Media',
+    description: 'Explore our creative portfolio — web design, video production, and digital media projects.',
+    alternates: {
+        canonical: 'https://k2digitalmedia.ca/our-works',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
+
+
 export default async function WorksIndexPage() {
     const supabase = createStaticSupabase();
     // IMPORTANT: your table is underscore in other files
