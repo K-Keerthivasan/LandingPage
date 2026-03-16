@@ -6,9 +6,9 @@ import Script from 'next/script';
 import '@fontsource/poppins';
 import '@fontsource/inter';
 import '@fontsource/roboto';
-import "@fontsource/cascadia-code/500-italic.css";
+import '@fontsource/cascadia-code/500-italic.css';
 
-// ✅ Best way to set metadata in App Router
+// Best way to set metadata in App Router
 export const metadata = {
     metadataBase: new URL('https://k2digitalmedia.ca'),
     title: {
@@ -51,7 +51,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
             <meta property="og:image" content="https://k2digitalmedia.ca/Logo.png" />
             <meta name="twitter:image" content="https://k2digitalmedia.ca/Logo.png" />
-            <title></title>
         </head>
         <body className="bg-white dark:bg-black text-black dark:text-white">
         <ThemeProvider>

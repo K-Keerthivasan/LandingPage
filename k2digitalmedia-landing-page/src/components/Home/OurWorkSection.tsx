@@ -148,7 +148,7 @@ export default function OurWorkSection() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                                 {visibleProjects.map((project, idx) => (
                                     <motion.div
-                                        key={idx}
+                                        key={project.route ?? `${project.title}-${idx}`}
                                         variants={cardVariants}
                                         initial="hidden"
                                         whileInView="visible"

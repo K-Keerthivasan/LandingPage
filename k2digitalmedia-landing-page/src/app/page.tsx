@@ -25,7 +25,7 @@ export const metadata = {
     openGraph: {
         title: 'K2Digital Media | Freelance Services Portfolio',
         description:
-            'Explore modern web dev, VFX, and editing projects by Keerthi – powered by K2Digital Media.',
+            'Explore modern web dev, VFX, and editing projects by Keerthi - powered by K2Digital Media.',
         url: 'https://k2digitalmedia.ca',
         siteName: 'K2Digital Media',
         images: [
@@ -43,7 +43,7 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'K2Digital Media | Web, VFX & Editing Services',
         description:
-            'Freelance portfolio of Keerthi – Full-Stack Developer, VFX Artist, and Editor.',
+            'Freelance portfolio of Keerthi - Full-Stack Developer, VFX Artist, and Editor.',
         images: ['/Logo.png'],
     },
 };

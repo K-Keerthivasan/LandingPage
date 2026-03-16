@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
         formats: ['image/avif', 'image/webp'],
     },
 
-    // 308 redirects: /our_works → /our-works (preserves SEO)
+    // 308 redirects: /our_works -> /our-works (preserves SEO)
     async redirects() {
         return [
             {

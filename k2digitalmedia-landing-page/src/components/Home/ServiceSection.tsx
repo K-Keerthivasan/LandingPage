@@ -15,11 +15,11 @@ type Service = {
     route: string;
     type: 'image' | 'video';
     created_at?: string;
-    content: 'string',
+    content: string;
 };
 
 import { createBrowserSupabase } from '@/app/lib/client';
-const supabase = await createBrowserSupabase();
+const supabase = createBrowserSupabase();
 
 // Define animation variants for each service item
 const itemVariants = {
@@ -53,9 +53,9 @@ export default function ServiceSection() {
     return (
         <>
             {/* Map through services and wrap each section with motion */}
-            {services.map((service, index) => (
+            {services.map((service) => (
                 <motion.section // Wrap each individual service item section
-                    key={index}
+                    key={service.id}
                     className="px-6 py-20 bg-white dark:bg-black text-black dark:text-white transition-colors duration-300"
                     variants={itemVariants} // Apply the item animation variants
                     initial="hidden"

@@ -1,7 +1,7 @@
 'use client';
 
 import { createBrowserSupabase } from '@/app/lib/client';
-const supabase = await createBrowserSupabase();
+const supabase = createBrowserSupabase();
 export type Service = {
     id: number;
     title: string;

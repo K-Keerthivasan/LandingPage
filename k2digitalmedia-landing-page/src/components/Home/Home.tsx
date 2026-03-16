@@ -32,7 +32,7 @@ export default function HomePage() {
                     </p>
                     <p className="mb-4 text-lg leading-relaxed">
                         We employ the latest technology to best understand how to impact your customers.
-                        Only taking on one client per industry per region, we won’t help your competition.
+                        Only taking on one client per industry per region, we won't help your competition.
                         Our goal is to help you build your business.
                     </p>
 

@@ -1,8 +1,8 @@
 'use client';
 
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { createBrowserSupabase } from '@/app/lib/client';
-const supabase = await createBrowserSupabase();
+const supabase = createBrowserSupabase();
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -50,52 +50,61 @@ export default function ContactPageSection() {
     });
 
     const [status, setStatus] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [captchaToken, setCaptchaToken] = useState('');
     const [captchaError, setCaptchaError] = useState('');
     const captchaRef = useRef<HCaptcha>(null);
 
-    // Toggle this to false if you want to skip verification.ts (⚠️ less secure)
+    // Toggle this to false if you want to skip verification.ts (less secure)
     const USE_SERVER_VERIFICATION = true;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (form.botField) return; // Block bots via honeypot
+        if (isSubmitting) return;
+        setStatus('');
 
         if (!captchaToken) {
             setCaptchaError('Please complete the CAPTCHA before submitting.');
             return;
         }
 
-        if (USE_SERVER_VERIFICATION) {
-            const verify = await fetch('/api/verify-captcha', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: captchaToken }),
-            });
+        try {
+            setIsSubmitting(true);
 
-            const { success } = await verify.json();
-            if (!success) {
-                setCaptchaError('CAPTCHA verification failed. Try again.');
-                captchaRef.current?.resetCaptcha(); // Reset if failed
-                return;
+            if (USE_SERVER_VERIFICATION) {
+                const verify = await fetch('/api/verify-captcha', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: captchaToken }),
+                });
+
+                const { success } = await verify.json();
+                if (!success) {
+                    setCaptchaError('CAPTCHA verification failed. Try again.');
+                    captchaRef.current?.resetCaptcha(); // Reset if failed
+                    return;
+                }
             }
-        }
 
-        const { error } = await supabase.from('contact_messages').insert([{
-            name: form.name,
-            email: form.email,
-            phone: form.phone,
-            message: form.message,
-        }]);
+            const { error } = await supabase.from('contact_messages').insert([{
+                name: form.name,
+                email: form.email,
+                phone: form.phone,
+                message: form.message,
+            }]);
 
-        if (error) {
-            setStatus('Failed to send message.');
-        } else {
-            setStatus('Message sent successfully!');
-            setForm({ name: '', email: '', phone: '', message: '', botField: '' });
-            setCaptchaToken('');
-            captchaRef.current?.resetCaptcha(); // ✅ Reset hCaptcha visually
+            if (error) {
+                setStatus('Failed to send message.');
+            } else {
+                setStatus('Message sent successfully!');
+                setForm({ name: '', email: '', phone: '', message: '', botField: '' });
+                setCaptchaToken('');
+                captchaRef.current?.resetCaptcha(); // Reset hCaptcha visually
+            }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -207,9 +216,10 @@ export default function ContactPageSection() {
                         <motion.button
                             type="submit"
                             variants={formElementVariants}
-                            className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-3 transition-colors"
+                            className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-3 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                            disabled={isSubmitting}
                         >
-                            Send
+                            {isSubmitting ? 'Sending...' : 'Send'}
                         </motion.button>
 
                         {/* Status Message */}
@@ -224,11 +234,27 @@ export default function ContactPageSection() {
                         viewport={{ once: true, amount: 0.5 }}
                         className="mt-8 text-xs text-center text-gray-600 dark:text-gray-400"
                     >
-                        This site is protected by reCAPTCHA and the Google{' '}
-                        <span className="text-blue-500 cursor-pointer">Privacy Policy</span> and{' '}
-                        <span className="text-orange-500 cursor-pointer">Terms of Service</span> apply. Use of this form for
+                        This site is protected by hCaptcha and the{' '}
+                        <a
+                            href="https://www.hcaptcha.com/privacy"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-blue-500 hover:underline"
+                        >
+                            Privacy Policy
+                        </a>{' '}
+                        and{' '}
+                        <a
+                            href="https://www.hcaptcha.com/terms"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-orange-500 hover:underline"
+                        >
+                            Terms of Service
+                        </a>{' '}
+                        apply. Use of this form for
                         solicitation may violate the{' '}
-                        <span className="text-pink-500 cursor-pointer">CAN-SPAM act</span>.
+                        <span className="text-pink-500">CAN-SPAM act</span>.
                     </motion.p>
                 </div>
 

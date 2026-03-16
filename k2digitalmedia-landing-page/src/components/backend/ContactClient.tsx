@@ -1,5 +1,5 @@
 import { createBrowserSupabase } from '@/app/lib/client';
-const supabase = await createBrowserSupabase();
+const supabase = createBrowserSupabase();
 
 export type ContactMessage = {
     id: number;
